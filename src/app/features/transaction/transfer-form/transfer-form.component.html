@@ -3,7 +3,7 @@
         <div class="icon">Icon</div>
         <div class="header-text">{{ 'transaction.transferForm.header' | translate }}</div>
     </app-header>
-    <div class="p-l">
+    <div class="p-l" #transferFormElement>
         <form [formGroup]="transferForm">
             <app-text-prefix-input label="transaction.transferForm.fromAccount.label"
                                    prefix="transaction.transferForm.fromAccount.prefix"
