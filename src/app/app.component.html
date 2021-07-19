@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="logo" [style.height.px]="logoHightInPixels">
+        <app-logo></app-logo>
+    </div>
+    <div class="content" [style.margin-top.px]="logoHightInPixels">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="footer" [style.height.px]="footerHeightInPixels">
+        <app-footer></app-footer>
+    </div>
+</div>
