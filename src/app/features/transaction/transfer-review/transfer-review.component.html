@@ -1,1 +1,29 @@
-<p>transfer-review works!</p>
+<div class="transfer-review-container border-mr overflow-hidden">
+    <div class="transfer-review-header p-l">
+        <div class="transfer-review-header-text">{{ 'transaction.transferReview.header' | translate }}</div>
+        <div class="close">
+            <button (click)="closeTransferReview()">x</button>
+        </div>
+    </div>
+
+    <hr/>
+    
+    <div class="transfer-review-content p-l">
+        <div class="confirmation">{{ 'transaction.transferReview.confirmation' | translate }}</div>
+        
+        <app-display-item [label]="'transaction.transferReview.toAccount' | translate"
+                          [content]="data?.toAccount">
+        </app-display-item>
+
+        <app-display-item [label]="'transaction.transferReview.amount' | translate"
+                          [content]="data?.amount | financialFormat : minFractionDigits : maxFractionDigits">
+        </app-display-item>
+    </div>
+
+    <hr/>
+
+    <div class="actions p-l">
+        <button class="btn" (click)="closeTransferReview()">{{ 'transaction.transferReview.actions.close' | translate }}</button>
+        <button class="btn-primary" (click)="submitTransfer()">{{ 'transaction.transferReview.actions.sendTransfer' | translate }}</button>
+    </div>
+</div>

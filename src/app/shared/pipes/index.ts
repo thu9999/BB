@@ -1,1 +1,1 @@
-export * from './delegate-helper.pipe';
+export * from './format-pipe.module';

@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppRoutingModule } from './app-routing.module';
 import { BbUIModule } from './bb-ui/bb-ui.module';
 import { CoreModule } from './core/core.module';
+import { LoadingSpinnerModule } from './shared/components/loading-spinner/loading-spinner.module';
 
 import { AppComponent } from './app.component';
 
@@ -26,6 +27,7 @@ export function setupFactory( appInitializationService: AppInitializationService
         BbUIModule,
         CoreModule,
         TranslateModule.forRoot(),
+        LoadingSpinnerModule
     ],
     providers: [
         {

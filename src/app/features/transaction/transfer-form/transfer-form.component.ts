@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, ComponentRef, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Overlay, OverlayConfig, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { TranslateService } from '@ngx-translate/core';
 import { merge } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { mapTo, takeUntil } from 'rxjs/operators';
 
 import {
     CdkOverlayService,
-    CURRENCY_DEFAULT,
+    DEFAULT_CURRENCY_SYMBOL,
     CustomValidators,
-    DECIMAL_NUMBER_DEFAULT,
+    DEFAULT_DECIMAL_NUMBER,
     DestroySubscriptionDirective,
     NumberHelper,
     ORIGIN_END,
@@ -35,9 +35,11 @@ const TRANSFER_REVIEW_OFFSET_X_IN_PIXELS = 32;
 export class TransferFormComponent extends DestroySubscriptionDirective implements OnInit {
     @ViewChild( 'transferFormElement', { static: false } ) transferFormElementRef: ElementRef;
 
+    @Output() transferCreated = new EventEmitter<number>();
+
     readonly transferFormKeys = TRANSFER_FORM_KEYS;
     readonly amountMask = NumberHelper.getDecimalMask();
-    readonly fromAccountMask = NumberHelper.getDecimalMask( DECIMAL_NUMBER_DEFAULT, false, `${ CURRENCY_DEFAULT } `)
+    readonly fromAccountMask = NumberHelper.getDecimalMask( DEFAULT_DECIMAL_NUMBER, false, `${ DEFAULT_CURRENCY_SYMBOL } `)
 
     transferForm: FormGroup;
     
@@ -73,7 +75,6 @@ export class TransferFormComponent extends DestroySubscriptionDirective implemen
             return;
         }
 
-        console.log( this.transferFormElementRef )
         const positionStrategy = this.getTransferReviewOverlayStrategy( this.transferFormElementRef );
 
         const config = new OverlayConfig( {
@@ -118,10 +119,23 @@ export class TransferFormComponent extends DestroySubscriptionDirective implemen
 
     private listenForCloseOverlayEvents( overlayRef: OverlayRef, component: TransferReviewComponent ): void {
         merge(
-            overlayRef.backdropClick(),
+            overlayRef.backdropClick().pipe(
+                mapTo( null )
+            ),
             component.getCloseOverlaySubjectAsObservable()
         ).pipe(
             takeUntil( this.destroyed$ )
-        ).subscribe( () => overlayRef.dispose() );
+        ).subscribe( transferId => {
+            overlayRef.dispose();
+
+            if ( transferId ) {
+                this.resetTransferForm();
+                this.transferCreated.emit( transferId );
+            }
+        } );
+    }
+
+    private resetTransferForm(): void {
+        this.transferForm.reset();
     }
 }

@@ -1,9 +1,9 @@
 import { createNumberMask } from 'text-mask-addons/dist/textMaskAddons';
-import { DECIMAL_NUMBER_DEFAULT, DECIMAL_SYMBOL, THOUSAND_SEPARATOR_SYMBOL } from '../constants';
+import { DEFAULT_DECIMAL_NUMBER, DECIMAL_SYMBOL, THOUSAND_SEPARATOR_SYMBOL } from '../constants';
 
 export class NumberHelper {
 
-    static getDecimalMask( decimalLimit = DECIMAL_NUMBER_DEFAULT, allowNegative = false, prefix = '' ): any {
+    static getDecimalMask( decimalLimit = DEFAULT_DECIMAL_NUMBER, allowNegative = false, prefix = '' ): any {
         return createNumberMask( {
             prefix: prefix,
             allowDecimal: true,

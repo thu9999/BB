@@ -22,20 +22,6 @@ body {
     padding-right: $small-spacing;
 }
 
-.submit-button {
-    display: flex;
-    justify-content: flex-end;
-
-    button {
-        color: $text-gray;
-        background-color: $accent;
-
-        border: none;
-        outline: none;
-        
-        padding: $medium-spacing;
-        border-radius: $small-spacing;
-
-        font-size: 16px;
-    }
+hr {
+    border-top: 1px solid $border-secondary;
 }

@@ -1,0 +1,14 @@
+{
+    "transaction": {
+        "transferReview": {
+            "header": "Review transfer",
+            "confirmation": "Are you ready to send out this transfer?",
+            "toAccount": "It will be send to account:",
+            "amount": "With the amount of:",
+            "actions": {
+                "close": "Close",
+                "sendTransfer": "Send Transfer"
+            }
+        }
+    }
+}
