@@ -1,0 +1,13 @@
+@import './var';
+
+.border-sr {
+    border-radius: $small-spacing;
+}
+
+.border-mr {
+    border-radius: $medium-spacing;
+}
+
+.border-secondary {
+    border-color: $border-secondary;
+}

@@ -1,0 +1,32 @@
+<div class="container border-mr overflow-hidden">
+    <app-header>
+        <div class="icon">Icon</div>
+        <div class="header-text">{{ 'transaction.transferForm.header' | translate }}</div>
+    </app-header>
+    <div class="p-l">
+        <form [formGroup]="transferForm">
+            <app-text-prefix-input label="transaction.transferForm.fromAccount.label"
+                                   prefix="transaction.transferForm.fromAccount.prefix"
+                                   [textMask]="fromAccountMask"
+                                   [formControlName]="transferFormKeys.FROM_ACCOUNT">
+            </app-text-prefix-input>
+
+            <app-text-prefix-input label="transaction.transferForm.toAccount.label"
+                                   placeholder="transaction.transferForm.toAccount.placeholder"
+                                   [error]="transferForm.controls[ transferFormKeys.TO_ACCOUNT ].invalid && ( transferForm.controls[ transferFormKeys.TO_ACCOUNT ].touched || transferForm.controls[ transferFormKeys.TO_ACCOUNT ].dirty ) ? 'transaction.transferForm.toAccount.validator.required' : ''"
+                                   [formControlName]="transferFormKeys.TO_ACCOUNT">
+            </app-text-prefix-input>
+
+            <app-text-prefix-input label="transaction.transferForm.amount.label"
+                                   placeholder="transaction.transferForm.amount.placeholder"
+                                   prefixIcon="&euro;"
+                                   [textMask]="amountMask"
+                                   [error]="transferForm.controls[ transferFormKeys.AMOUNT ].invalid && ( transferForm.controls[ transferFormKeys.AMOUNT ].touched || transferForm.controls[ transferFormKeys.AMOUNT ].dirty ) | delegateHelper : getAmountError : transferForm.controls[ transferFormKeys.AMOUNT ].errors"
+                                   [formControlName]="transferFormKeys.AMOUNT">
+            </app-text-prefix-input>
+        </form>
+        <div class="submit-button pt-m pb-m">
+            <app-submit-button (submitForm)="handleSubmitTransferForm()"></app-submit-button>
+        </div>
+    </div>
+</div>

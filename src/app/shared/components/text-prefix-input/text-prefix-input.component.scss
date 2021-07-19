@@ -1,0 +1,40 @@
+@import '../../../../assets/styles/var';
+
+.input-container {
+    .label,
+    .content,
+    input {
+        font-size: 14px;
+    }
+
+    .prefix-icon {
+        border-right: 1px solid $border-secondary;
+    }
+    
+    .text-error {
+        font-size: 13px;
+        color: $warn;
+    }
+    
+    .content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        border: 1px solid $border-secondary;
+
+        &.form-invalid {
+            border-color: $warn;
+        }
+    }
+    
+    .input {
+        flex: 1;
+        
+        input {
+            width: 100%;
+            border: none;
+            outline: none;
+        }
+    }
+}

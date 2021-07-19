@@ -1,0 +1,26 @@
+{
+    "transaction": {
+        "transferForm": {
+            "header": "Make transfer",
+            "fromAccount": {
+                "label": "From Account",
+                "prefix": "My Personal Account:"
+            },
+            "toAccount": {
+                "label": "To Account",
+                "placeholder": "Type an account name",
+                "validator": {
+                    "required": "This field is required"
+                }
+            },
+            "amount": {
+                "label": "Amount",
+                "placeholder": "Specify the amount",
+                "validator": {
+                    "required": "This field is required",
+                    "lessThan": "There is not enough balance"
+                }
+            }
+        }
+    }
+}
