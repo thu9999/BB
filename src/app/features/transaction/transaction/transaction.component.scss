@@ -13,6 +13,8 @@
 
         .transfer-form {
             flex-grow: 4;
+            display: flex;
+            justify-content: center;
         }
 
         .transaction-list {

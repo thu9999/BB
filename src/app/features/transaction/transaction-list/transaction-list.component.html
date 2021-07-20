@@ -1,1 +1,25 @@
-<p>transaction-list works!</p>
+<div class="container border-mr overflow-hidden bg-white">
+    <app-header>
+        <div class="icon">
+            <i class="fa fa-list"></i>
+        </div>
+        <div class="header-text">{{ 'transaction.transactionList.header' | translate }}</div>
+    </app-header>
+    <div class="p-l transaction-list-container">
+        <app-filter (inputChange)="handleFilterTransaction($event)"></app-filter>
+        <div class="transaction-list pt-l">
+            <ng-container *ngFor="let transaction of filteredTransactions">
+                <app-transaction-item class="p-l mt-s mb-s">
+                    <div data-test-hook="transactionColour" [style.background-color]="transaction?.categoryCode"></div>
+                    <div data-test-hook="transactionDate" class="p-s">{{ transaction?.dates?.valueDate | date : shortDateFormat : null : ( locale$ | async ) }}</div>
+                    <div data-test-hook="transactionMerchantName" class="p-s">{{ transaction?.merchant?.name }}</div>
+                    <div data-test-hook="transactionType" class="p-s">{{ transaction?.transaction?.type }}</div>
+                    <div data-test-hook="transactionAmount" class="p-s" [ngClass]="transaction?.transaction?.amountCurrency?.amount > 0 ? 'positive' : 'negative'">
+                        {{ transaction?.transaction?.amountCurrency?.amount | financialFormat : minFractionDigits : maxFractionDigits : transaction?.transaction?.amountCurrency?.currencyCode }}
+                    </div>
+                </app-transaction-item>
+                <hr/>
+            </ng-container>
+        </div>
+    </div>
+</div>

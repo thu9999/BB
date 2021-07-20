@@ -1,29 +1,47 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { defer, Observable } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map, pluck, tap } from 'rxjs/operators';
 
-import { TransferTO } from '../../../../core/models';
+import { environment } from 'src/environments/environment';
+import { DataHelper, DateHelper, NumberHelper } from 'src/app/shared';
+import { TransactionDetails, TransferTO } from '../../../../core/models';
+import * as transactions from 'src/app/mock/mock-data/transactions.json';
+import * as transaction from 'src/app/mock/mock-data/transaction.json';
 
-const DELAY_IN_MILLISECONDS = 1000;
 const CREATED_TRANSFER_ID = 12345;
 
 @Injectable()
 export class TransactionService {
+    private url = environment.baseUrl;
+
     constructor( private http: HttpClient ) {
     }
 
     createTransfer( transferTO: TransferTO ): Observable<number> {
-        return TransactionService.asyncData( CREATED_TRANSFER_ID );
+        return DataHelper.asyncData( CREATED_TRANSFER_ID );
     }
 
-    /**
-     * Simulate http
-     * Emit once and complete
-     */
-    static asyncData<T>( data: T ) {
-        return defer( () => Promise.resolve( data ) ).pipe(
-            delay( DELAY_IN_MILLISECONDS )
-        );
+    getTransactionList(): Observable<TransactionDetails[]> {
+        const path = 'dev/transactions';
+        return this.http.get<TransactionDetails[]>( `${ this.url }/${ path }` ).pipe(
+            pluck( 'data'),
+            catchError( () => of( transactions.data as TransactionDetails[] ) ),
+            map( ( transactionDetails: TransactionDetails[] ) => this.dateStringToNumber( transactionDetails ) ),
+            map( ( transactionDetails: TransactionDetails[] ) => transactionDetails.sort( ( a, b ) => NumberHelper.compareDesc( a.dates.valueDate, b.dates.valueDate ) ) ),
+        )
+    }
+
+    getTransaction( transferId: number ): Observable<TransactionDetails> {
+        return DataHelper.asyncData( transaction.data as TransactionDetails );
+    }
+
+    private dateStringToNumber( transactionDetails: TransactionDetails[] ): TransactionDetails[] {
+        return transactionDetails.map( transaction => ( {
+            ...transaction,
+            dates: {
+                valueDate: DateHelper.toNumberDate( transaction.dates.valueDate )
+            }
+        } ) );
     }
 }

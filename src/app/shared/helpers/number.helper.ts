@@ -21,4 +21,15 @@ export class NumberHelper {
         }
         return Number( str.replace( thousandSymbolRegex, '' ).replace( DECIMAL_SYMBOL, '.' ) );
     }
+
+    static compareDesc( a: number, b: number ): number {
+        if ( a > b ){
+            return -1;
+        }
+
+        if ( a < b ){
+            return 1;
+        }
+        return 0;
+    }
 }

@@ -1,0 +1,61 @@
+@import '../../../../assets/styles/var';
+
+.transaction-list {
+    max-height: 650px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+app-transaction-item {
+    position: relative;
+    display: flex;
+
+    div {
+        display: flex;
+        align-items: center;
+    }
+
+    div[data-test-hook='transactionColour'] {
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        height: 80%;
+        width: $small-spacing;
+
+        transform: translateY( 10% );
+    }
+
+    div[data-test-hook='transactionDate'] {
+        flex-grow: 2;
+    }
+
+    div.merchant-details {
+        flex-grow: 4;
+    }
+
+    div[data-test-hook='transactionMerchantName'] {
+        font-weight: 500;
+    }
+
+    div[data-test-hook='transactionType'] {
+        color: gray;
+    }
+
+    div[data-test-hook='transactionAmount'] {
+        flex-grow: 6;
+        display: flex;
+        justify-content: flex-end;
+
+        &.negative {
+            color: $warn;
+        }
+
+        &.positive {
+            color: $green;
+        }
+    }
+}

@@ -15,13 +15,55 @@ body {
     overflow: hidden;
 }
 
-.header-text {
-    color: $text-gray;
-    font-size: 18px;
-    padding-left: $small-spacing;
-    padding-right: $small-spacing;
+app-header {
+    .icon {
+        color: white;
+        font-size: 20px;
+        padding-right: $medium-spacing;
+    }
+
+    .header-text {
+        color: $text-gray;
+        font-size: 18px;
+        padding-left: $small-spacing;
+        padding-right: $small-spacing;
+    }    
 }
 
 hr {
     border-top: 1px solid $border-secondary;
+}
+
+input#transactions {
+    width: 360px;
+    padding: $medium-spacing;
+
+    border-top: 1px solid $border-secondary;
+    border-right: 1px solid $border-secondary;
+    border-bottom: 1px solid $border-secondary;
+    border-left: none;
+    border-top: 1px solid $border-secondary;
+    border-top-right-radius: $small-spacing;
+    border-bottom-right-radius: $small-spacing;
+
+    outline: none;
+    margin-left: 32px;
+}
+
+.lni-search::after {
+    @include icon( '\f002', 1.6rem );
+    position: absolute;
+    width: 32px;
+    height: 35px;
+    font-size: 20px;
+    color: gray;
+
+    background: $background-secondary;
+
+    border-top: 1px solid $border-secondary;
+    border-left: 1px solid $border-secondary;
+    border-bottom: 1px solid $border-secondary;
+
+    border-top-left-radius: $small-spacing;
+    border-bottom-left-radius: $small-spacing;
 }

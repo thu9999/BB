@@ -1,0 +1,60 @@
+@import './var';
+.m-s {
+    padding: $small-spacing;
+}
+
+.mt-s {
+    padding-top: $small-spacing;
+}
+
+.mt-s {
+    padding-right: $small-spacing;
+}
+
+.mb-s {
+    padding-bottom: $small-spacing;
+}
+
+.ml-s {
+    padding-left: $small-spacing;
+}
+
+.m-m {
+    padding: $medium-spacing;
+}
+
+.mt-m {
+    padding-top: $medium-spacing;
+}
+
+.mt--m {
+    padding-right: $medium-spacing;
+}
+
+.mb-m {
+    padding-bottom: $medium-spacing;
+}
+
+.ml-m {
+    padding-left: $medium-spacing;
+}
+
+.m-l {
+    padding: $large-spacing;
+}
+
+.mt-l {
+    padding-top: $large-spacing;
+}
+
+.mt-l {
+    padding-right: $large-spacing;
+}
+
+.mb-l {
+    padding-bottom: $large-spacing;
+}
+
+.ml-l {
+    padding-left: $large-spacing;
+}

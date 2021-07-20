@@ -3,7 +3,7 @@
         <app-logo></app-logo>
     </div>
     <div class="content" [style.margin-top.px]="logoHightInPixels">
-        <div class="background-image"></div>
+        <div class="background-image" [style.top.px]="footerHeightInPixels"></div>
         <router-outlet></router-outlet>
     </div>
     <div class="footer" [style.height.px]="footerHeightInPixels">

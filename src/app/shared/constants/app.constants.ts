@@ -2,6 +2,8 @@ import { InjectionToken } from '@angular/core';
 
 export const APP_LANGUAGE = 'lang';
 export const DEFAULT_APP_LANGUAGE = 'en';
+export const LOCALE_TOKEN = new InjectionToken<any>( 'LOCALE_TOKEN' );
+
 export const APP_LOADING = 'App loading';
 export const DEFAULT_APP_LOADING = false;
 
@@ -20,3 +22,5 @@ export const ORIGIN_END = 'end';
 export const ORIGIN_TOP = 'top';
 export const OVERLAY_START = 'start';
 export const OVERLAY_TOP = 'top';
+
+export const SHORT_DATE_FORMAT = 'MMM. d';

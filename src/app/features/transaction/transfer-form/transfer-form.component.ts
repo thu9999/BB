@@ -137,5 +137,7 @@ export class TransferFormComponent extends DestroySubscriptionDirective implemen
 
     private resetTransferForm(): void {
         this.transferForm.reset();
+        this.transferForm.markAsUntouched();
+        this.transferForm.markAsPristine();
     }
 }
