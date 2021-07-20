@@ -1,6 +1,6 @@
 <div class="transaction-container">
     <div class="transfer-form">
-        <app-transfer-form></app-transfer-form>
+        <app-transfer-form (transferCreated)="handleTransferCreatedEvent($event)"></app-transfer-form>
     </div>
     <div class="transaction-list">
         <app-transaction-list></app-transaction-list>

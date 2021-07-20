@@ -8,4 +8,7 @@ import { Component } from '@angular/core';
     ]
 } )
 export class TransactionComponent {
+    handleTransferCreatedEvent( transferId: number ): void {
+        console.log( transferId );
+    }
 }
