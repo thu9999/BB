@@ -11,7 +11,7 @@ import { DEFAULT_MAX_FRACTION_DIGITS, DEFAULT_MIN_FRACTION_DIGITS, LOCALE_TOKEN,
     changeDetection: ChangeDetectionStrategy.OnPush
 } )
 export class TransactionListComponent implements OnChanges {
-    @Input() transactions: TransactionDetails[];
+    @Input() transactions: TransactionDetails[] = [];
 
     readonly minFractionDigits = DEFAULT_MIN_FRACTION_DIGITS;
     readonly maxFractionDigit = DEFAULT_MAX_FRACTION_DIGITS;
@@ -25,7 +25,7 @@ export class TransactionListComponent implements OnChanges {
     }
 
     ngOnChanges( changes: SimpleChanges): void {
-        if ( changes.transactions.currentValue ) {
+        if ( changes?.transactions?.currentValue ) {
             this.filterTransaction();
         }
     }
@@ -36,7 +36,7 @@ export class TransactionListComponent implements OnChanges {
     }
 
     private filterTransaction(): void {
-        this.filteredTransactions = [ ...this.transactions ]?.filter( transaction => transaction.merchant.name.toLowerCase().includes( this.filterValue ) );
+        this.filteredTransactions = [ ...this.transactions ].filter( transaction => transaction.merchant.name.toLowerCase().includes( this.filterValue.trim().toLowerCase() ) );
         this.cdRef.detectChanges();
     }
 }

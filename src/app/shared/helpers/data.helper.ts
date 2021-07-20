@@ -1,7 +1,7 @@
 import { defer } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-const DELAY_IN_MILLISECONDS = 1000;
+import { DELAY_IN_MILLISECONDS } from '../constants';
 
 export class DataHelper {
     static asyncData<T>( data: T ) {

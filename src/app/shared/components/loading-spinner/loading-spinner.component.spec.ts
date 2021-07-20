@@ -1,25 +1,32 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { LoadingSpinnerComponent } from './loading-spinner.component';
 
-describe('LoadingSpinnerComponent', () => {
-  let component: LoadingSpinnerComponent;
-  let fixture: ComponentFixture<LoadingSpinnerComponent>;
+describe( 'LoadingSpinnerComponent', () => {
+    let component: LoadingSpinnerComponent;
+    let fixture: ComponentFixture<LoadingSpinnerComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LoadingSpinnerComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach( async( () => {
+        TestBed.configureTestingModule( {
+            declarations: [
+                LoadingSpinnerComponent
+            ]
+        } )
+        .compileComponents();
+    } ) );
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LoadingSpinnerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent( LoadingSpinnerComponent );
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    } );
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    describe( 'container', () => {
+        it( 'should render loader', () => {
+            const container = fixture.debugElement.query( By.css( '.loader-container' ) );
+            const loader = container.query( By.css( '.loader' ) ).nativeElement;
+            expect( loader.textContent ).toBe( '' );
+        } );
+    } );
+} );

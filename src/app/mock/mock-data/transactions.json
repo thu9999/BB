@@ -86,12 +86,13 @@
       }
     }, {
       "categoryCode": "#c89616",
+      
       "dates": {
         "valueDate": 1600214400000
       },
       "transaction": {
         "amountCurrency": {
-          "amount": "46.25",
+          "amount": "-46.25",
           "currencyCode": "EUR"
         },
         "type": "Card Payment",

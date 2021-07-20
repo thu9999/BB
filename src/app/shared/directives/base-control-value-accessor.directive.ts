@@ -5,7 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { DestroySubscriptionDirective } from './destroy-subscription.directive';
 
 @Directive()
-export abstract class BaseControlValueAccessorDirective extends DestroySubscriptionDirective implements ControlValueAccessor {
+export class BaseControlValueAccessorDirective extends DestroySubscriptionDirective implements ControlValueAccessor {
     control = new FormControl();
 
     onTouched = () => {};

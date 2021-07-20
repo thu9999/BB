@@ -9,7 +9,7 @@
         <form [formGroup]="transferForm">
             <app-text-prefix-input label="transaction.transferForm.fromAccount.label"
                                    prefix="transaction.transferForm.fromAccount.prefix"
-                                   [textMask]="fromAccountMask"
+                                   [mask]="fromAccountMask"
                                    [formControlName]="transferFormKeys.FROM_ACCOUNT">
             </app-text-prefix-input>
 
@@ -22,7 +22,7 @@
             <app-text-prefix-input label="transaction.transferForm.amount.label"
                                    placeholder="transaction.transferForm.amount.placeholder"
                                    prefixIcon="&euro;"
-                                   [textMask]="amountMask"
+                                   [mask]="amountMask"
                                    [error]="transferForm.controls[ transferFormKeys.AMOUNT ].invalid && ( transferForm.controls[ transferFormKeys.AMOUNT ].touched || transferForm.controls[ transferFormKeys.AMOUNT ].dirty ) | delegateHelper : getAmountError : transferForm.controls[ transferFormKeys.AMOUNT ].errors"
                                    [formControlName]="transferFormKeys.AMOUNT">
             </app-text-prefix-input>

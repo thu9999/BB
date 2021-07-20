@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
 import { BaseControlValueAccessorDirective } from '../../directives';
 
 @Component( {
@@ -23,5 +24,5 @@ export class TextPrefixInputComponent extends BaseControlValueAccessorDirective 
     @Input() prefixIcon = '';
     @Input() placeholder = '';
     @Input() error = '';
-    @Input() textMask: any;
+    @Input() mask: any;
 }

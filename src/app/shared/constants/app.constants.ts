@@ -1,8 +1,10 @@
 import { InjectionToken } from '@angular/core';
+import { LocaleEnum } from '../enums';
 
 export const APP_LANGUAGE = 'lang';
 export const DEFAULT_APP_LANGUAGE = 'en';
 export const LOCALE_TOKEN = new InjectionToken<any>( 'LOCALE_TOKEN' );
+export const DEFAULT_LOCALE = LocaleEnum.EN;
 
 export const APP_LOADING = 'App loading';
 export const DEFAULT_APP_LOADING = false;
@@ -24,3 +26,5 @@ export const OVERLAY_START = 'start';
 export const OVERLAY_TOP = 'top';
 
 export const SHORT_DATE_FORMAT = 'MMM. d';
+
+export const DELAY_IN_MILLISECONDS = 1000;

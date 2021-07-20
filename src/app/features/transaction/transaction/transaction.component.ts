@@ -12,7 +12,7 @@ import { TransactionService } from '../shared';
     changeDetection: ChangeDetectionStrategy.OnPush
 } )
 export class TransactionComponent implements OnInit {
-    transactionsList: TransactionDetails[];
+    transactionsList: TransactionDetails[] = [];
 
     constructor( private transactionService: TransactionService,
                  private cdRef: ChangeDetectorRef ) {

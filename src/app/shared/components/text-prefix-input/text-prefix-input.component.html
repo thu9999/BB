@@ -1,10 +1,10 @@
 <div class="input-container pt-s pb-s">
-    <div class="label pt-m pb-m">{{ label | translate }}</div>
+    <div *ngIf="label" class="label pt-m pb-m">{{ label | translate }}</div>
     <div class="content border-sr overflow-hidden" [class.form-invalid]="!!error" [class.bg-secondary]="control.disabled">
-        <div *ngIf="!!prefix" class="pl-m prefix">{{ prefix | translate }}</div>
-        <div *ngIf="!!prefixIcon" class="bg-secondary prefix-icon p-m">{{ prefixIcon }}</div>
+        <div *ngIf="!!prefix" class="prefix pl-m">{{ prefix | translate }}</div>
+        <div *ngIf="!!prefixIcon" class="prefix-icon bg-secondary p-m">{{ prefixIcon }}</div>
         <div class="input overflow-hidden" (click)="onTouched()">
-            <input *ngIf="textMask; else nonTextMask" [formControl]="control" [placeholder]="placeholder | translate" class="p-m" [textMask]="{ mask: textMask }" />
+            <input *ngIf="mask; else nonTextMask" [formControl]="control" [placeholder]="placeholder | translate" class="p-m" [textMask]="{ mask: mask }" />
             <ng-template #nonTextMask>
                 <input [formControl]="control" [placeholder]="placeholder | translate" class="p-m" />
             </ng-template>

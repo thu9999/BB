@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { merge } from 'rxjs';
 import { mapTo, takeUntil } from 'rxjs/operators';
 
+import { TransferReviewComponent } from '../transfer-review/transfer-review.component';
 import {
     CdkOverlayService,
     DEFAULT_CURRENCY_SYMBOL,
@@ -18,7 +19,6 @@ import {
     OVERLAY_TOP
 } from 'src/app/shared';
 import { TRANSFER_FORM_KEYS } from './../shared';
-import { TransferReviewComponent } from '../transfer-review/transfer-review.component';
 
 const MY_ACCOUNT_BALANCE = 5000;
 const ALLOWED_AMOUNT_BELOW_TOTAL_BALANCE = -500;
@@ -39,7 +39,7 @@ export class TransferFormComponent extends DestroySubscriptionDirective implemen
 
     readonly transferFormKeys = TRANSFER_FORM_KEYS;
     readonly amountMask = NumberHelper.getDecimalMask();
-    readonly fromAccountMask = NumberHelper.getDecimalMask( DEFAULT_DECIMAL_NUMBER, false, `${ DEFAULT_CURRENCY_SYMBOL } `)
+    readonly fromAccountMask = NumberHelper.getDecimalMask( DEFAULT_DECIMAL_NUMBER, false, DEFAULT_CURRENCY_SYMBOL );
 
     transferForm: FormGroup;
     
@@ -89,7 +89,7 @@ export class TransferFormComponent extends DestroySubscriptionDirective implemen
 
     private initFormGroup(): void {
         this.transferForm = this.fb.group( {
-            [ TRANSFER_FORM_KEYS.FROM_ACCOUNT ]: [ { value: MY_ACCOUNT_BALANCE, disabled: true } ],
+            [ TRANSFER_FORM_KEYS.FROM_ACCOUNT ]: { value: MY_ACCOUNT_BALANCE, disabled: true },
             [ TRANSFER_FORM_KEYS.TO_ACCOUNT ]: [ '', [ Validators.required ] ],
             [ TRANSFER_FORM_KEYS.AMOUNT ]: [ '', this.getAmountValidators() ]
         } );
