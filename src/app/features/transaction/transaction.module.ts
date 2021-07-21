@@ -17,6 +17,8 @@ import { TransferReviewComponent } from './transfer-review/transfer-review.compo
 
 import { CdkOverlayService, FormatPipeModule } from 'src/app/shared';
 import { TransactionService } from './shared';
+import { MockModule } from 'src/app/mock/mock.module';
+import { environment } from 'src/environments/environment';
 
 @NgModule( {
     declarations: [
@@ -36,7 +38,8 @@ import { TransactionService } from './shared';
         OverlayModule,
         TextPrefixInputModule,
         TransactionRoutingModule,
-        TranslateModule
+        TranslateModule,
+        environment.production ? [] : MockModule
     ],
     providers: [
         CdkOverlayService,

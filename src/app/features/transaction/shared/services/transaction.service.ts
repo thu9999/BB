@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map, pluck, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, pluck, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
-import { DataHelper, DateHelper, NumberHelper } from 'src/app/shared';
+import { DateHelper, NumberHelper } from 'src/app/shared';
 import { TransactionDetails, TransferTO } from '../../../../core/models';
-import * as transactions from 'src/app/mock/mock-data/transactions.json';
-import * as transaction from 'src/app/mock/mock-data/transaction.json';
-
-const CREATED_TRANSFER_ID = 12345;
 
 @Injectable()
 export class TransactionService {
@@ -19,21 +15,26 @@ export class TransactionService {
     }
 
     createTransfer( transferTO: TransferTO ): Observable<number> {
-        return DataHelper.asyncData( CREATED_TRANSFER_ID );
+        const path = 'dev/transactions';
+        return this.http.post<TransactionDetails[]>( `${ this.url }/${ path }`, transferTO ).pipe(
+            pluck( 'data', 'id' )
+        );
     }
 
     getTransactionList(): Observable<TransactionDetails[]> {
         const path = 'dev/transactions';
         return this.http.get<TransactionDetails[]>( `${ this.url }/${ path }` ).pipe(
-            pluck( 'data'),
-            catchError( () => of( transactions.data as TransactionDetails[] ) ),
+            pluck( 'data' ),
             map( ( transactionDetails: TransactionDetails[] ) => this.dateStringToNumber( transactionDetails ) ),
             map( ( transactionDetails: TransactionDetails[] ) => transactionDetails.sort( ( a, b ) => NumberHelper.compareDesc( a.dates.valueDate, b.dates.valueDate ) ) ),
         )
     }
 
     getTransaction( transferId: number ): Observable<TransactionDetails> {
-        return DataHelper.asyncData( transaction.data as TransactionDetails );
+        const path = `dev/transactions/${ transferId }`;
+        return this.http.get<TransactionDetails[]>( `${ this.url }/${ path }` ).pipe(
+            pluck( 'data')
+        );
     }
 
     private dateStringToNumber( transactionDetails: TransactionDetails[] ): TransactionDetails[] {

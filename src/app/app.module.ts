@@ -8,10 +8,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { BbUIModule } from './bb-ui/bb-ui.module';
 import { CoreModule } from './core/core.module';
 import { LoadingSpinnerModule } from './shared/components/loading-spinner/loading-spinner.module';
+import { MockModule } from './mock/mock.module';
 
 import { AppComponent } from './app.component';
 import { AppInitializationService, SettingsService } from './core/services';
 import { APP_LANGUAGE, LOCALE_TOKEN } from './shared';
+import { environment } from 'src/environments/environment';
 
 export function setupFactory( appInitializationService: AppInitializationService ): () => Promise<Object> {
     return () => appInitializationService.load();
@@ -33,7 +35,8 @@ export function localeFactory( settingsService: SettingsService ): Observable<st
         BbUIModule,
         CoreModule,
         TranslateModule.forRoot(),
-        LoadingSpinnerModule
+        LoadingSpinnerModule,
+        environment.production ? [] : MockModule
     ],
     providers: [
         {

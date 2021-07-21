@@ -1,22 +1,27 @@
 import { of } from 'rxjs';
+
 import { Dates, TransactionDetails, TransferTO } from 'src/app/core/models';
 import { DataHelper } from 'src/app/shared';
 import { TransactionService } from './transaction.service';
 
-const CREATED_TRANSFER_ID = 12345;
-
 describe( 'TransactionService', () => {
     let transactionService: TransactionService;
     let httpClientSpy: {
-        get: jasmine.Spy
+        get: jasmine.Spy,
+        post: jasmine.Spy
     };
 
     let fakeTransactions: TransactionDetails[];
-    let fakeTransactionData: { data: TransactionDetails[] };
+    let fakeTransactionsData: { data: TransactionDetails[] };
+
     let fakeTransaction: TransactionDetails;
+    let fakeTransactionData: { data: TransactionDetails };
+
+    let fakeTransferId: number;
+    let fakeTransferIdData: { data: { [ key: string ]: any } };
 
     beforeEach( () => {
-        httpClientSpy = jasmine.createSpyObj( 'HttpClient', [ 'get' ] );
+        httpClientSpy = jasmine.createSpyObj( 'HttpClient', [ 'get', 'post' ] );
         transactionService = new TransactionService( httpClientSpy as any );
 
         fakeTransactions = [
@@ -38,30 +43,43 @@ describe( 'TransactionService', () => {
             return transaction;
         } );
         
-        fakeTransactionData = {
+        fakeTransactionsData = {
             data: fakeTransactions
         }
         
         fakeTransaction = new TransactionDetails();
         fakeTransaction.dates = new Dates();
         fakeTransaction.dates.valueDate = '2020-01-01' as any;
+
+        fakeTransactionData = {
+            data: fakeTransaction
+        }
+
+        fakeTransferId = 12345;
+        fakeTransferIdData = {
+            data: {
+                id: fakeTransferId
+            }
+        }
     } );
 
     describe( 'createTransfer', () => {
         it( 'should create transfer', ( done ) => {
+            httpClientSpy.post.and.returnValue( DataHelper.asyncData( fakeTransferIdData ) );
             transactionService.createTransfer( new TransferTO() ).subscribe(
                 transferId => {
-                    expect( transferId ).toBe( CREATED_TRANSFER_ID );
+                    expect( transferId ).toBe( fakeTransferId );
                     done();
                 },
                 done.fail
             );
+            expect( httpClientSpy.post.calls.count() ).toBe( 1 );
         } );
     } );
 
     describe( 'getTransactionList', () => {
         it( 'should return sorted transaction list by date', ( done ) => {
-            httpClientSpy.get.and.returnValue( DataHelper.asyncData( fakeTransactionData ) );
+            httpClientSpy.get.and.returnValue( DataHelper.asyncData( fakeTransactionsData ) );
 
             transactionService.getTransactionList().subscribe(
                 transactions => {
@@ -82,7 +100,7 @@ describe( 'TransactionService', () => {
 
     describe( 'getTransaction', () => {
         it( 'should return a transaction', ( done ) => {
-            spyOn( DataHelper as any, 'asyncData' ).and.returnValue( of( fakeTransaction ) );
+            httpClientSpy.get.and.returnValue( DataHelper.asyncData( fakeTransactionData ) );
 
             transactionService.getTransaction( 123 ).subscribe(
                 transaction => {
@@ -91,6 +109,7 @@ describe( 'TransactionService', () => {
                 },
                 done.fail
             );
+            expect( httpClientSpy.get.calls.count() ).toBe( 1 );
         } );
     } );
 
