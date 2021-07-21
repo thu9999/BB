@@ -1,0 +1,20 @@
+{
+    "data": {
+        "categoryCode": "#12a580",
+        "dates": {
+          "valueDate": 1700493600000
+        },
+        "transaction": {
+          "amountCurrency": {
+            "amount": 5000,
+            "currencyCode": "EUR"
+          },
+          "type": "Salaries",
+          "creditDebitIndicator": "CRDT"
+        },
+        "merchant": {
+          "name": "Backbase",
+          "accountNumber": "SI64397745065188826"
+        }
+    }
+}

@@ -12,10 +12,10 @@
         <div class="confirmation">{{ 'transaction.transferReview.confirmation' | translate }}</div>
         
         <app-display-item [label]="'transaction.transferReview.toAccount' | translate"
-                          [content]="data?.toAccount">
+                          [content]="data?.toAccount" class="to-account">
         </app-display-item>
 
-        <app-display-item [label]="'transaction.transferReview.amount' | translate"
+        <app-display-item [label]="'transaction.transferReview.amount' | translate" class="amount"
                           [content]="data?.amount | financialFormat : minFractionDigits : maxFractionDigits">
         </app-display-item>
     </div>
